@@ -13,15 +13,19 @@ $(document).ready(function () {
 				
 				quote = response.quote;
 				author = response.author;
-				console.log(quote + ' and the author is ' + author);
+				// console.log(quote + ' and the author is ' + author);
+				$('#quote').html(quote);
+				$('#quote-author').html(author);
 
 			},
 			error : function(err){
 				console.log("There was an error + ", err);
 			}
 		});		
+		
 	}
 
 	getQuote();
+	$('#newQuote').on('click',getQuote);
 
 });
