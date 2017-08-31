@@ -1,6 +1,10 @@
 $(document).ready(function () {
+
+
+
 	var quote = '';
 	var author = '';
+	var colors = ['#00CC99', '#2B99E2', '#2B76E2', '#CE2BE2', '#E22BAA', '#115D99', '#990099', '#00B1CC', '#00FFCC', '#0079CC'];
 	function getQuote () {
 		$.ajax({
 			headers : {
@@ -14,8 +18,15 @@ $(document).ready(function () {
 				quote = response.quote;
 				author = response.author;
 				// console.log(quote + ' and the author is ' + author);
-				$('#quote').html(quote);
-				$('#quote-author').html(author);
+				console.log(quote);
+				console.log(author);
+				$("#quote").text(quote);
+				$('#quote-author').text(author);
+				var color = Math.floor(Math.random() * colors.length);
+			      $("html body").animate({
+			        backgroundColor: colors[color]
+			      }, 1000);
+				$('#quote, #quote-author').fadeIn('fast');
 
 			},
 			error : function(err){
@@ -25,7 +36,18 @@ $(document).ready(function () {
 		
 	}
 
+	
+
+	$('#newQuote').on('click',fadeQuoteAway);
+
+	function fadeQuoteAway() {
+		$('#quote, #quote-author').fadeOut('slow');
+		getQuote();
+	}
+
+
+
 	getQuote();
-	$('#newQuote').on('click',getQuote);
+
 
 });
